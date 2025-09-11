@@ -1,4 +1,5 @@
 import { createInterface } from "readline";
+import { getCommands } from "./command_registry.js";
 
 
 export function cleanInput(input: string): string[] {
@@ -22,7 +23,19 @@ export function startREPL() {
         if (!words) {
             rlInterface.prompt();
         } else {
-            console.log(`Your command was: ${words[0]}`);
+            const command = words[0];
+            const commands = getCommands();
+            if (command in commands) {
+                try {
+                    commands[command].callback(commands);
+                } catch (err) {
+                    if (err instanceof Error) {
+                        console.log(err.message);
+                    }
+                }
+            } else {
+                console.log("Unknown Command")
+            }
             rlInterface.prompt();
         }
     });

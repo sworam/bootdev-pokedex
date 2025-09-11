@@ -18,6 +18,10 @@ describe.each([
         input: "EVERYTHING IS UPPER CASE",
         expected: ["everything", "is", "upper", "case"],
     },
+    {
+        input: "singleWord",
+        expected: ["singleword"],
+    },
 ])("cleanInput($input)", ({ input, expected }) => {
     test(`Expected: ${expected}`, () => {
         const actual = cleanInput(input);
