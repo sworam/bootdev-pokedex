@@ -14,27 +14,30 @@ export function cleanInput(input: string): string[] {
     return cleaned_words;
 }
 
-export function startREPL() {
+export async function startREPL() {
     const state = initState();
     state.rlInterface.prompt();
-    state.rlInterface.on("line", (input) => {
+    state.rlInterface.on("line", async (input) => {
         const words = cleanInput(input);
         if (!words) {
             state.rlInterface.prompt();
-        } else {
-            const command = words[0];
-            if (command in state.commands) {
-                try {
-                    state.commands[command].callback(state);
-                } catch (err) {
-                    if (err instanceof Error) {
-                        console.log(err.message);
-                    }
-                }
-            } else {
-                console.log("Unknown Command")
-            }
+            return;
+        } 
+        
+        const command = words[0];
+        if (!(command in state.commands)) {
+            console.log("Unknown Command")
             state.rlInterface.prompt();
+            return;
         }
+        
+        try {
+            await state.commands[command].callback(state);
+        } catch (err) {
+            if (err instanceof Error) {
+                console.log(err.message);
+            }
+        }
+        state.rlInterface.prompt();
     });
 }
