@@ -68,3 +68,9 @@ export type Pokemon = {
     name: string;
     url: "string";
 }
+
+export type DetailedPokemon = {
+    id: number;
+    name: string;
+    base_experience: number;
+}
