@@ -10,7 +10,7 @@ export async function commandCatch(state: State, pokemonName?: string) {
         const { catchChance, pokemon } = await calculateCatchChance(state, pokemonName);
         if (Math.random() <= catchChance) {
             console.log(`${pokemonName} was caught!`);
-            state.pokedex[pokemonName] = pokemon;
+            state.pokedex[pokemonName] = { ...pokemon, catchChance } ;
         } else {
             console.log(`${pokemonName} escaped!`);
         }
@@ -21,6 +21,6 @@ export async function commandCatch(state: State, pokemonName?: string) {
 
 async function calculateCatchChance(state: State, pokemonName: string) {
     const pokemon = await state.pokeAPI.fetchPokemon(pokemonName);
-    const catchChance = 3 / (pokemon.base_experience/10);
+    const catchChance = 1.9 / (pokemon.base_experience/20);
     return { catchChance, pokemon }
 }

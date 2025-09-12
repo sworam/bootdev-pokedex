@@ -8,6 +8,8 @@ export async function commandInspect (state: State, pokemonName: string) {
     console.log(`Name: ${pokemon.name}`);
     console.log(`Height: ${pokemon.height}`);
     console.log(`Weight: ${pokemon.weight}`);
+    console.log(`BaseXP: ${pokemon.base_experience}`);
+    console.log(`CatchChance: ${pokemon.catchChance}`);
     console.log("Stats:");
     for (const stat of pokemon.stats) {
         console.log(` - ${stat.stat.name}: ${stat.base_stat}`);

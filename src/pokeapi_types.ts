@@ -79,6 +79,8 @@ export type DetailedPokemon = {
     types: Type[];
 }
 
+export type PokemonWithCatchChance = DetailedPokemon & { catchChance: number };
+
 export type Stat = {
     base_stat: number;
     effort: number;
