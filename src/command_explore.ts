@@ -1,4 +1,4 @@
-import { DetailedLocation } from "./pokeapi.js";
+import { DetailedLocation } from "./pokeapi_types.js";
 import { State } from "./state.js";
 
 export async function commandExplore(state: State, location?: string) {
