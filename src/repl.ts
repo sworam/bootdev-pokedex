@@ -32,7 +32,7 @@ export async function startREPL() {
         }
         
         try {
-            await state.commands[command].callback(state);
+            await state.commands[command].callback(state, ...words.slice(1));
         } catch (err) {
             if (err instanceof Error) {
                 console.log(err.message);
